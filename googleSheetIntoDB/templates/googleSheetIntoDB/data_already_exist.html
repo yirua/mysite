@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'googleSheetIntoDB/style.css' %}" />
+<html>
+
+<head>
+    <title>Data Already Exist!</title>
+
+</head>
+<body>
+    <!-- <h3>path_json_db: {{ path_to_json_db }}</h3> -->
+    <h1 font="Times New Roman" STYLE="strong">Data Already in the DB! </h1>
+    <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
+                        {% csrf_token %}
+                        <button type="submit" class="save btn btn-default">Go Home</button>
+    </form>
+</body>
+</html>

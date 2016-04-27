@@ -1,51 +1,28 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'googleSheetIntoDB/style.css' %}" />
 <html>
 <head>
-    <title>Title</title>
+    <title>Google Sheet Choice</title>
 </head>
 <body>
-    {% load sheets %}
+    {% if google_sheet_list %}
+    <ul>
+        {% for question in google_sheet_list %}
+            {% if forloop.counter == 1 %}
+                <li><a href="/googleSheetIntoDB/first_choice.html/?title={{ question.title }}&id={{ question.id }}">{{ question.title }}</a></li>
 
-{% csv "1ZPIYJtaPNIEpT_rvvR3WfKvXYx1_p2vZtHycCPUUaJg" gid='1489986476' as data %}
-<table>
-    <thead>
-        <tr>
-        {% for header in data.headers %}
-            <th>{{ header }}</th>
-        {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in data.rows %}
-        <tr>
-            {% for cell in row %}
-                <td>{{ cell }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            {% else %}
+                <li><a href="/googleSheetIntoDB/first_choice.html/?title={{ question.title }}&id={{ question.id }}">{{ question.title }}</a></li>
 
-{% csv "1mu9CVYUIi81Ntag5eIEzJEUV8RmWT_V0DCzmh9lqwAs" gid='1489986476' as data %}
-<table>
-    <thead>
-        <tr>
-        {% for header in data.headers %}
-            <th>{{ header }}</th>
-        {% endfor %}
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in data.rows %}
-        <tr>
-            {% for cell in row %}
-                <td>{{ cell }}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            {% endif%}
+        {% endfor%}
+    </ul>
+    {% else %}
+    <p>No sheets are available.</p>
+    {% endif %}
 
 
 
