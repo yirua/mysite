@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<h3>List of Choices</h3>
+{% if google_sheet_list %}
+    {% for list in google_sheet_list %}
+    <ul>
+        {% if forloop.counter == 1 %}
+        <li><a href="first_choice.html" target="view_frame">{{ list.title }}</a></li>
+        {% elif forloop.counter == 2 %}
+        <li><a href="second_choice.html" target="view_frame">{{ list.title }}</a></li>
+        {% endif%}
+    </ul>
+    {% endfor%}
+{% else %}
+    <p>No sheets are available.</p>
+{% endif %}
+</html>
