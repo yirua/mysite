@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Success to put data into Database</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <h3>Good job! You have put {{ sheet_title }} into database. Thank you.</h3>
+
+ <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
+                        {% csrf_token %}
+                        <button type="submit" class="save btn btn-info">Home Page</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'googleSheetIntoDB/style.css' %}" />
+<html>
+
+<head>
+    <title>Data Already Exist!</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+    {# <h2>path_json_db: {{ path_to_json_db }}</h2> #}
+    <div class="container">
+    <h3 font="Arial" STYLE="italic">Data Already in the DB! Would you like to overwrite it? </h3>
+
+        <form  action= "{% url 'googleSheetIntoDB:choose_to_overwrite' %}" method="get" autocomplete="on">
+                        {% csrf_token %}
+            <ul><label for="sheet_id">Sheet_id: </label>
+                            <input id="sheet_id" type="text" name="sheet_id" value="{{ sheet_id }}" >
+                </ul>
+            <ul><label for="sheet_title">Sheet_title: </label>
+                            <input id="sheet_title" type="text" name="sheet_title" value="{{ sheet_title }}" >
+                </ul>
+            <ul><label for="path_to_json_db">path_to_json_db: </label>
+                            <input id="path_to_json_db" type="text" name="path_to_json_db" value="{{ path_to_json_db }}" readonly>
+            </ul>
+                        <button type="submit" class="save btn btn-info" name="_cancel">Cancel</button>
+                        <button type="submit" class="save btn btn-info" name="_yes"> Yes </button>
+        </form>
+    </div>
+</body>
+</html>
