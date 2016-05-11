@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Json path and Year input is done.</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+<div class="container">
+    <form  action= "{% url 'googleSheetIntoDB:data_index' %}" method="get">
+                        {% csrf_token %}
+            <label for="json_path">json_path: </label>
+                            <input id="json_path" type="text" name="json_path" value="{{ json_path }}">
+            <label for="trial_year">trial_year: </label>
+                            <input id="trial_year" type="text" name="trial_year" value="{{ trial_year }}">
+
+                        <button type="submit" class="save btn btn-info" name="_cancel">Cancel</button>
+                        <button type="submit" class="save btn btn-info" name="_yes"> Yes </button>
+    </form>
+</div>
+</body>
+</html>
