@@ -2,9 +2,13 @@ from django.test import TestCase
 import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from django.http import Http404
+
 
 from .models import Metadata
 from .models import MetadataManager
+from .models import Json_path
+from .models import Json_path_Manager
 
 # Create your tests here.
 
@@ -52,6 +56,22 @@ class MetadataCreateTests(TestCase):
         '''
         return values_list_3  # googleSheet_listing
 
+    def get_titles_in_db(self):
+        return Metadata.objects.all()
+
+    def google_list_to_choose(self):
+        try:
+            scope = ['https://spreadsheets.google.com/feeds']
+            # credentials = ServiceAccountCredentials.from_json_keyfile_name('/Users/yiweisun/Downloads/GoogleSheetTest-d112a30fe1a8.json', scope)
+            json_path = '/Users/yiweisun/Downloads/GoogleSheetTest-d112a30fe1a8.json'
+            credentials = ServiceAccountCredentials.from_json_keyfile_name(json_path, scope)
+            gc = gspread.authorize(credentials)
+            sh_all = gc.openall()
+
+        except gspread.exceptions.SpreadsheetNotFound:
+            raise Http404("No Spreadsheet found.")
+        else:
+            return sh_all  # googleSheet_listing
 
     def test_MetadataCreaterTest(self):
         list = self.list_to_choose()
@@ -64,3 +84,39 @@ class MetadataCreateTests(TestCase):
         self.assertEqual(metadata.city, 'Ames')
         self.assertEqual(metadata.note19, 'comment iah1 19')
         self.assertEqual(metadata.cardinal, '250')
+
+    # this method with compare two lists then return a dictionary with Imported_status(T/F), Import_date, Import_data(T/F), Refresh_data(T/F)
+    def get_googleSheet_list(self,list_from_google, list_from_db):
+        googleSheet_listing = []
+
+        # Add these item in the list
+        for googleSheet in list_from_google:
+            single_object = {'title': googleSheet.title,'id': googleSheet.id,'imported_status': 'F','imported_date': '','import_data': 'F','refresh_data': 'F'}
+            googleSheet_listing.append(single_object)
+
+        # Add them into googleSheet_listing
+        # compare with list_from_db, update certain data
+        for i in range(len(googleSheet_listing)):
+            for google_list_from_db in list_from_db:
+                if googleSheet_listing[i]['id'] == google_list_from_db.sheet_id:
+                    #print 'oh yep'
+                    googleSheet_listing[i]['imported_status'] = 'T'
+                    googleSheet_listing[i]['imported_date'] = google_list_from_db.date_import
+                    googleSheet_listing[i]['refresh_data'] = 'T'
+        # print googleSheet_listing
+        return googleSheet_listing
+
+
+
+# To test the get_googleSheet_list function
+    def test_get_googleSheet_list(self):
+        google_list=self.google_list_to_choose()
+        db_list=self.get_titles_in_db()
+        list=self.get_googleSheet_list(google_list,db_list)
+        self.assertEqual(list[0]['imported_status'], 'T')
+        self.assertEqual(list[0]['import_data'],'T')
+        self.assertEqual(list[1]['imported_status'], 'T')
+        self.assertEqual(list[1]['import_data'], 'T')
+        self.assertEqual(list[2]['imported_status'], 'T')
+        self.assertEqual(list[2]['import_data'], 'T')
+

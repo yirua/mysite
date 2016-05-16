@@ -10,7 +10,7 @@ urlpatterns =[
     # ex: /googleSheetIntoDB/5/
     url(r'^(?P<metadata_id>[0-9]+)/$', views.detailView, name='detailView'),
     url(r'^detail/$', views.detail, name='detail'),
-    url(r'^toc/$', views.toc, name='toc'),
+   # url(r'^toc/$', views.toc, name='toc'),
     #url(r'^first_choice/$', views.first_choice, name='first_choice'),
     url(r'^detail_view/$', views.detail_view, name='detail_view'),
     url(r'^index_google_sheet_list/$', views.index_google_sheet_list, name='index_google_sheet_list'),

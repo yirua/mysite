@@ -8,7 +8,7 @@ from django.views.generic import TemplateView, ListView, CreateView
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_protect
 
-
+import string
 import gspread
 import gspread.exceptions
 from oauth2client.service_account import ServiceAccountCredentials
@@ -37,11 +37,13 @@ def index(request):
 # Create your views here.
 def data_index(request):
     #template= loader.get_template('googleSheetIntoDB/index.html')
-    ####################### get the google sheet list
 
-    google_sheet_list= list_to_choose()
-    ##########################
+    ####################### get the google sheet list
+    google_sheet=list_to_choose()
     titles_in_db = get_titles_in_db()
+    google_sheet_list= get_googleSheet_list(google_sheet,titles_in_db)
+    ##########################
+
     ## tried to take out the google sheet if it is already put into the django db
     trial_year=Json_path.objects.last().trial_year
     json_path=Json_path.objects.last().json_path
@@ -98,7 +100,6 @@ def choose(request):
     else:
         # put the rows into Metadata table
         if Metadata.objects.filter(sheet_id=sheet_id).exists():
-
             context = {'path_to_json_db':Json_path.objects.last().json_path,'sheet_id':request.GET['sheet_id'],'sheet_title':request.GET['sheet_title']}
             return render(request,'googleSheetIntoDB/data_already_exist.html',context)
         else:
@@ -166,9 +167,6 @@ def choose_to_input_data(request):
 
 #######################################################################################
 
-
-
-
 def data_in_db_success(request):
     context={'sheet_title':Metadata.objects.last().title}
     return render(request, 'googleSheetIntoDB/data_in_db_success.html',context)
@@ -182,25 +180,16 @@ def data_already_exist(request):
     return render(request, 'googleSheetIntoDB/data_already_exist.html',context)
 
 ########################################################################################
-def toc(request):
-    google_sheet_list = list_to_choose()
-    ##########################
-
-    context = {'google_sheet_list': google_sheet_list}
-    return render(request, 'googleSheetIntoDB/toc.html', context)
 
 def detail_view(request):
     google_sheet_list = list_to_choose()
-
-    context = {'google_sheet_list': google_sheet_list, 'sheet_title':request.GET['title'], 'sheet_id':request.GET['id']}
+    context = {'google_sheet_list': google_sheet_list, 'sheet_id':request.GET['id'],'title':request.GET['title']}
     return render(request, 'googleSheetIntoDB/detail_view.html',context)
 
 
 ##########################
 def index_google_sheet_list(request):
     google_sheet_list = list_to_choose()
-
-
     context = {'google_sheet_list': google_sheet_list}
     return render(request, 'googleSheetIntoDB/index_google_sheet_list.html', context)
 ########################## PATH FORM  to get the json file path from a form
@@ -226,34 +215,12 @@ def get_path(request):
 ####################################################
 
 def list_to_choose():
-
-    googleSheet_listing = []
     try:
         scope = ['https://spreadsheets.google.com/feeds']
        # credentials = ServiceAccountCredentials.from_json_keyfile_name('/Users/yiweisun/Downloads/GoogleSheetTest-d112a30fe1a8.json', scope)
         json_path = Json_path.objects.last().json_path
         credentials = ServiceAccountCredentials.from_json_keyfile_name(json_path, scope)
         gc = gspread.authorize(credentials)
-        '''
-        sh = gc.open_by_id(
-          'https://docs.google.com/spreadsheets/d/1mu9CVYUIi81Ntag5eIEzJEUV8RmWT_V0DCzmh9lqwAs/edit#gid=1489986476')
-
-        sh1 = gc.open_by_url(
-          'https://docs.google.com/spreadsheets/d/1ZPIYJtaPNIEpT_rvvR3WfKvXYx1_p2vZtHycCPUUaJg/edit#gid=2130071960')
-
-        worksheet = sh.get_worksheet(4)
-        worksheet_list = sh.worksheets()
-        # worksheet_list
-        values_list = worksheet.row_values(1)
-        values_list_2 = worksheet.row_values(2)
-        values_list_3 = worksheet.row_values(3)
-
-        worksheet_1 = sh1.get_worksheet(4)
-        worksheet_list_1 = sh.worksheets()
-        worksheet_list_1
-      # before to do the openall(), you have to share the documents with the client email that in the downloaded json file. for example, scenic-setup-128014@appspot.gserviceaccount.com, which
-      # is NOT the gmail email account.
-      '''
         sh_all = gc.openall()
 
     except gspread.exceptions.SpreadsheetNotFound:
@@ -307,5 +274,36 @@ def set_local_json_path(local_path):
 def get_local_json_path():
     return local_json_path
 
+# this method with compare two lists then return a dictionary with Imported_status(T/F), Import_date, Import_data(T/F), Refresh_data(T/F)
+def get_googleSheet_list(list_from_google, list_from_db):
+    googleSheet_listing = []
+
+    # Add these item in the list
+    for googleSheet in list_from_google:
+        single_object={'title':googleSheet.title, 'id':googleSheet.id,'imported_status':'F','imported_date': '','import_data': 'T','refresh_data': 'F'}
+        googleSheet_listing.append(single_object)
+
+    # Add them into googleSheet_listing
+    # compare with list_from_db, update certain data
+    for i in range(len(googleSheet_listing)):
+        for google_list_from_db in list_from_db:
+            if googleSheet_listing[i]['id'] == google_list_from_db.sheet_id:
+                    googleSheet_listing[i]['imported_status']='T'
+                    googleSheet_listing[i]['imported_date']=google_list_from_db.date_import
+                    googleSheet_listing[i]['import_data'] = 'F'
+                    googleSheet_listing[i]['refresh_data']='T'
+
+    return googleSheet_listing
+
 def get_titles_in_db():
     return Metadata.objects.all()
+
+def get_year_from_row_values(row_values):
+    try:
+
+        trial_year=row_values[10]
+        trial_year=trial_year.split('/')[2]
+    except trial_year:
+        raise ('trial_year is empty.')
+    else:
+        return trial_year
