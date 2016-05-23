@@ -136,7 +136,8 @@ class Sheet_List(models.Model):
     title = models.CharField(max_length=200)
     json_path_id = models.ForeignKey(Json_path)
     sheet_id = models.CharField(max_length=100,unique=True)
-
+    selected_import_list=[]
+    selected_refresh_list=[]
     def __str__(self):
 
         return self.title
@@ -148,6 +149,25 @@ class Sheet_List(models.Model):
     class Admin:
 
         pass
+    # for template language usage
+    def selected_import_list_append(self,googlesheet):
+        self.selected_import_list.append(googlesheet)
+
+    def get_seleceted_import_list(self):
+        return self.selected_import_list
+    def clean_selected_import_list(self):
+        del self.selected_import_list[:]
+
+
+    def selected_refresh_list_append(self, googlesheet):
+        self.selected_refresh_list.append(googlesheet)
+
+    def get_selected_refresh_list(self):
+        return self.selected_refresh_list
+
+    def clean_selected_refresh_list(self):
+        del self.selected_refresh_list[:]
+
 ######################
 '''
 class Sheet_Already_In_DBManager(models.Manager):

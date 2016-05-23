@@ -21,5 +21,7 @@ urlpatterns =[
    # url(r'^choose/data_in_db_success.html$', views.data_in_db_success, name='choose_data_in_db_success'),
     url(r'^choose_to_overwrite.html$', views.choose_to_overwrite, name='choose_to_overwrite'),
     url(r'^data_in_db_success.html$', views.data_in_db_success, name='data_in_db_success'),
-
+    url(r'^choose_to_refresh', views.choose_to_refresh, name='choose_to_refresh'),
+    url(r'^refresh_data_in_db_success.html$',views.refresh_data_in_db_success, name='refresh_data_in_db_success'),
+    url(r'^googleSheetIntoDB/no_list_to_select.html$',views.no_list_to_select, name='no_list_to_select'),
 ]
