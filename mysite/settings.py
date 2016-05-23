@@ -78,10 +78,27 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'local': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+
+    'postgre_local': {
+        'NAME': os.path.join(BASE_DIR, 'googleSheetIntoDB/models.metadata'),#'metadata',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'yiweisun',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'POSR':'5432',
+    },
+    'default': {
+        'NAME': 'metadata', #os.path.join(BASE_DIR, 'db.metadata'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'GenE',
+        'PASSWORD': 'Field$',
+        'HOST': '129.186.85.29',
+        'POSR': '5432',
+    },
 }
 
 

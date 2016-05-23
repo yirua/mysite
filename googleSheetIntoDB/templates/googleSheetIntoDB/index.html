@@ -1,30 +1,56 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 {% load staticfiles %}
-
 <link rel="stylesheet" type="text/css" href="{% static 'googleSheetIntoDB/style.css' %}" />
 <html>
+
 <head>
-    <title>Google Sheet Choice</title>
+    <title>Data Already Exist!</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 </head>
 <body>
-    {% if google_sheet_list %}
-    <ul>
-        {% for question in google_sheet_list %}
-            {% if forloop.counter == 1 %}
-                <li><a href="/googleSheetIntoDB/first_choice.html/?title={{ question.title }}&id={{ question.id }}">{{ question.title }}</a></li>
+<div class="container">
+     <div>
+        <h3>The Json file path and trial_year in the db are:</h3>
 
-            {% else %}
-                <li><a href="/googleSheetIntoDB/first_choice.html/?title={{ question.title }}&id={{ question.id }}">{{ question.title }}</a></li>
+         <table id="t_json" border="1">
+            <thead>
+                <tr>
+                    <td>Json_path</td>
+                    <td>Trial_year</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in json_objects %}
+                    <tr>
 
-            {% endif%}
-        {% endfor%}
-    </ul>
-    {% else %}
-    <p>No sheets are available.</p>
-    {% endif %}
+                        <td>{{ object.json_path }}</td>
+                        <td>{{ object.trial_year }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+     </div>
 
+     <div>
+    {# <h2>path_json_db: {{ path_to_json_db }}</h2> #}
+    <h3 font="Arial" STYLE="italic">Would you like to input json path and year? </h3>
 
+        <form  action= "{% url 'googleSheetIntoDB:choose_to_input_data' %}" method="get">
+                        {% csrf_token %}
+            <label for="json_path">json_path: </label>
+                            <input id="json_path" type="text" name="json_path" value="{{ json_path }}">
+            <label for="trial_year">trial_year: </label>
+                            <input id="trial_year" type="text" name="trial_year" value="{{ trial_year }}">
 
+            <button type="submit" class="save btn btn-info" name="_cancel">Cancel</button>
+            <button type="submit" class="save btn btn-info" name="_yes"> Yes </button>
+    </form>
+    </div>
+    <div>
+        <p>{{ json_path_year_is_there }}</p>
+    </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,26 @@
+li a {
+    color: orange;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2em; /* 40px/16 = 2.5em */;
+    alignment: center;
+}
+p{
+    color: red;
+    font-family:"Times New Roman";
+    font-size: 1em;
+    }
+h3 {
+    color: orange;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1em;
+    alignment: center;
+}
+body {
+    background: white url("images/background.jpg") repeat left bottom;
+}
+table {
+
+    color: green;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2em;
+}

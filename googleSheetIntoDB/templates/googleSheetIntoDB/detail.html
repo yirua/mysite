@@ -7,7 +7,7 @@
 <body>
     {% load sheets %}
 
-{% csv "1ZPIYJtaPNIEpT_rvvR3WfKvXYx1_p2vZtHycCPUUaJg" gid='1489986476' as data %}
+{% csv metadata.sheet_id gid='1489986476' as data %}
 <table id="t01" border="1">
     <thead>
         <tr>
@@ -26,8 +26,8 @@
         {% endfor %}
     </tbody>
 </table>
-
-{% csv "1mu9CVYUIi81Ntag5eIEzJEUV8RmWT_V0DCzmh9lqwAs" gid='1489986476' as data %}
+{% csv metadata.sheet_id gid='1489986476' as data %}
+{# {% csv "1mu9CVYUIi81Ntag5eIEzJEUV8RmWT_V0DCzmh9lqwAs" gid='1489986476' as data %} #}
 <table id="t02" border="1">
     <thead>
         <tr>

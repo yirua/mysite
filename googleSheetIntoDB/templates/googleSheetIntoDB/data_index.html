@@ -1,0 +1,166 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">   -->
+
+
+
+
+<!DOCTYPE html>
+
+ {% load staticfiles %}
+
+ <link rel="stylesheet" type="text/css" href="{% static 'googleSheetIntoDB/style.css' %}" />
+<link rel="stylesheet" href="build.css">
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Google Sheet Choice</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+  </head>
+  <body>
+  <div class="container">
+    {% if google_sheet_list %}
+
+    <ul>
+        <div>
+        <h3>The google sheet list that shared with your client email in download json file. </h3>
+            <table>
+                    <thead>
+                    <tr><td>Sheet_title</td><td>Imported_status</td><td>Import_date</td><td>Import_data</td></tr>
+                    </thead>
+
+                    <form  action= "{% url 'googleSheetIntoDB:choose' %}" method="post">
+                                                        {% csrf_token %}
+                    {% for question in google_sheet_list %}
+                    <tr>
+                        <td><a href="/googleSheetIntoDB/detail_view/?detail_title={{ question.title }}&detail_id={{ question.id }}">{{ question.title }}</a></td>
+                        {% if question.imported_status == 'F' %}
+
+                        <td align="middle"><div class="checkbox checkbox-success"><input type="checkbox" value="{{question.id}}" disabled></div></td>
+                        {% else %}
+                        <td align="middle"><div class="checkbox checkbox-success"><input type="checkbox" checked disabled></div></td>
+                        {% endif%}
+                        <td align="middle">{{ question.imported_date }}</td>
+                        {% if question.import_data == 'F' %}
+
+                        <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" disabled></div></td>
+                        {% else %}
+                        <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" value="{{question.id}}" checked></div></td>
+                        {# {% Sheet_List.selected_import_list_append(question) %}  #}
+                        {% endif%}
+
+                       {# <td>  #}
+                       {#     <form  action= "{% url 'googleSheetIntoDB:detail_view' %}" method="get">#}
+                        {#    {% csrf_token %}#}
+                        {#        <input hidden type="" name="detail_title" value="{{ question.title }}">#}
+                        {#        <button type="submit" class="save btn btn-info" name="detail_id" value="{{ question.id }}"> View Details </button>#}
+                        {#    </form>#}
+                        {#</td>#}
+
+                    </tr>
+
+                    {% endfor%}
+                    <tr>
+                        <td></td><td></td><td></td><td>
+
+                                                        <button type="submit" class="save btn btn-info" name="sheet" value="{{ question.id }}"> Import Data </button>
+                                                        </form>
+                                                    </td>
+
+                    </tr>
+            </table>
+        </div>
+        <div>
+        <h3>The google sheet list that shared with your client email in download json file for refreshing. </h3>
+            <table>
+                    <thead>
+                    <tr><td>Sheet_title</td><td>Imported_status</td><td>Import_date</td><td>Import_data</td><td>Refresh_data</td></tr>
+                    </thead>
+                        <form  action= "{% url 'googleSheetIntoDB:choose_to_refresh' %}" method="post">
+                            {% csrf_token %}
+                        {% for question in google_sheet_list %}
+                        <tr>
+                            <td><a href="/googleSheetIntoDB/detail_view/?detail_title={{ question.title }}&detail_id={{ question.id }}">{{ question.title }}</a></td>
+                            {% if question.imported_status == 'F' %}
+
+                            <td align="middle"><div class="checkbox checkbox-success"><input name= "imported_status" type="checkbox" value="{{ question.id }}" disabled></div></td>
+                            {% else %}
+                            <td align="middle"><div class="checkbox checkbox-success"><input name="imported_status" type="checkbox" checked disabled></div></td>
+                            {% endif%}
+                            <td align="middle">{{ question.imported_date }}</td>
+                            {% if question.import_data == 'F' %}
+
+                            <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" disabled></div></td>
+                            {% else %}
+                            <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" value="{{question.id}}" checked></div></td>
+                            {# {% Sheet_List.selected_import_list_append(question) %}  #}
+                            {% endif%}
+
+                            {% if question.refresh_data == 'F' %}
+
+                            <td align="middle"><div class="checkbox checkbox-success"><input name="refresh_checks" type="checkbox" disabled></div></td>
+                            {% else %}
+                            <td align="middle"><div class="checkbox checkbox-success"><input name="refresh_checks" type="checkbox" value="{{ question.id }}" checked></div></td>
+                            {# <!-- {% Sheet_List.selected_refresh_list_append(question) %} --> #}
+                            {% endif%}
+
+
+                        </tr>
+
+                        {% endfor%}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><button type="submit" class="save btn btn-info" name="sheet" value="import_data"> Import Data </button></td>
+                                <td>
+                                   <button type="submit" class="save btn btn-info" name="sheet" value="refresh_data"> Refresh Data </button>
+                            </form>
+                                </td>
+
+                            </tr>
+            </table>
+        </div>
+    </ul>
+
+    <ul>
+        <h3>The google sheet list that is already put into the database table:</h3>
+
+            {% for item in titles_in_db %}
+                <li><a>{{ item.title }}</a></li>
+
+            {% endfor %}
+    </ul>
+    {% else %}
+
+    <ul>
+        <h2>No sheets are available to put into the database table.</h2>
+        <h3>The google sheets that are already put into the database table:</h3>
+
+            {% for item in titles_in_db %}
+                <li><a>{{ item.title }}</a></li>
+
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+  </body>
+</html>

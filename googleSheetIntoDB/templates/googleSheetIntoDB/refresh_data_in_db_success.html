@@ -8,7 +8,7 @@
 </head>
 <body>
         {# {% for list in refresh_list %} #}
-        <h3>Good job! You have put import_titles:{{ import_list }} trial_year:{{ trial_year }} org_import_list:{{ google_sheet_list }} into database. Thank you.</h3>
+        <h3>Good job! You have put json_list:{{ refresh_list }} import_list: {{ import_list }} id:{{ sheet_id }} trial_year:{{ trial_year }} into database. Thank you.</h3>
          {# {% endfor %} #}
  <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
                         {% csrf_token %}

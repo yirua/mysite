@@ -85,7 +85,7 @@ div {
                         </tbody>
                     </table>
 
-                <form  action= "{% url 'googleSheetIntoDB:choose' %}" method="GET" class="form-horizontal" role="form">
+                <form  action= "{% url 'googleSheetIntoDB:data_index' %}" method="GET" class="form-horizontal" role="form">
                         {% csrf_token %}
                     <div class="form-group">
                             <label for="sheet_id">Sheet_id: </label>
@@ -93,10 +93,10 @@ div {
                     </div>
                     <div class="form-group">
                              <label for="sheet_title">Sheet_title: </label>
-                             <input class="form-control" id="sheet_title" type="text" name="sheet_title" value="{{ sheet_title }}">
+                             <input class="form-control" id="sheet_title" type="text" name="sheet_title" value="{{ title }}">
                      </div>
                     <div class="form-group">
-                        <button type="submit" class="submit" class="save btn btn-info">Approved</button>
+                        <button type="submit" class="submit" class="save btn btn-info">Close</button>
                     </div>
                 </form>
 
