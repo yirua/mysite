@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+{% extends 'googleSheetIntoDB/base.html' %}
+<head>
+    <title>No list to select</title>
+</head>
+<body>
+{% block content %}
+    <h1>No list to select!</h1>
+{% endblock %}
+<form  action= "{% url 'googleSheetIntoDB:data_index' %}" method="get">
+    {% csrf_token %}
+
+    <button type="submit" class="save btn btn-info" name="sheet" > Home Page </button>
+</form>
+
+</body>
+</html>
