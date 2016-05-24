@@ -213,7 +213,7 @@ def choose_to_refresh(request):
                     # create a new record object with certain parameter..
                     rows = row_values_open_by_key(Json_path.objects.last().json_path, id)
                     metadata = Metadata.objects.create_metadata(id, title, trial_year, rows)
-                    add_refresh_title(Metadata.objects.last())
+                    add_refresh_title(Metadata.objects.last().title)
 
                 context = {'refresh_list':refresh_list, 'refresh_titles':get_refresh_sheet_titles(), 'trial_year':Json_path.objects.last().trial_year}
                 return render(request,'googleSheetIntoDB/refresh_data_in_db_success.html',context)
@@ -450,7 +450,7 @@ def set_import_sheet_titles():
     import_sheet_titles=[]
 
 def add_import_title(sheet):
-    import_sheet_titles.append(sheet.title)
+    import_sheet_titles.append(sheet)
 
 def get_import_sheet_titles():
     return import_sheet_titles
