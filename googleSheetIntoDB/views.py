@@ -228,7 +228,18 @@ def choose_to_refresh(request):
                 json_path = Json_path.objects.last().json_path
                 context = {'google_sheet_list': google_sheet_list,'titles_in_db':titles_in_db}
                 return render(request, 'googleSheetIntoDB/data_index.html', context)
+        #to delete data in the django db
+        elif 'delete_data' in request.POST['sheet']:
+            #get the list from delete_checks
+            delete_list = request.POST.getlist('delete_checks')
 
+            for one_delete_list in delete_list:
+                Metadata.objects.filter(sheet_id=one_delete_list).delete()
+            google_sheet = list_to_choose()
+            titles_in_db = get_titles_in_db()
+            google_sheet_list = get_googleSheet_list(google_sheet, titles_in_db)
+            context={'google_sheet_list': google_sheet_list,'titles_in_db':titles_in_db,'delete_list':delete_list,'trial_year':Json_path.objects.last().trial_year}
+            return render(request,'googleSheetIntoDB/refresh_data_in_db_success.html',context)
         else:
             return render(request,'googleSheetIntoDB/no_list_to_select.html')
     else:
