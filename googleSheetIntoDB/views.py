@@ -215,7 +215,7 @@ def choose_to_refresh(request):
                     metadata = Metadata.objects.create_metadata(id, title, trial_year, rows)
                     add_refresh_title(Metadata.objects.last().title)
 
-                context = {'refresh_list':refresh_list, 'refresh_titles':get_refresh_sheet_titles(), 'trial_year':Json_path.objects.last().trial_year}
+                context = {'refresh_list':get_refresh_sheet_titles(), 'trial_year':Json_path.objects.last().trial_year}
                 return render(request,'googleSheetIntoDB/refresh_data_in_db_success.html',context)
             else:
                 google_sheet = list_to_choose()
@@ -232,14 +232,28 @@ def choose_to_refresh(request):
         elif 'delete_data' in request.POST['sheet']:
             #get the list from delete_checks
             delete_list = request.POST.getlist('delete_checks')
+            if delete_list:
+                for one_delete_list in delete_list:
+                    Metadata.objects.filter(sheet_id=one_delete_list).delete()
+                google_sheet = list_to_choose()
+                titles_in_db = get_titles_in_db()
+                google_sheet_list = get_googleSheet_list(google_sheet, titles_in_db)
+                context={'google_sheet_list': google_sheet_list,'titles_in_db':titles_in_db,'delete_list':delete_list,'trial_year':Json_path.objects.last().trial_year}
+                return render(request,'googleSheetIntoDB/refresh_data_in_db_success.html',context)
+            else:
 
-            for one_delete_list in delete_list:
-                Metadata.objects.filter(sheet_id=one_delete_list).delete()
-            google_sheet = list_to_choose()
-            titles_in_db = get_titles_in_db()
-            google_sheet_list = get_googleSheet_list(google_sheet, titles_in_db)
-            context={'google_sheet_list': google_sheet_list,'titles_in_db':titles_in_db,'delete_list':delete_list,'trial_year':Json_path.objects.last().trial_year}
-            return render(request,'googleSheetIntoDB/refresh_data_in_db_success.html',context)
+
+                google_sheet = list_to_choose()
+                titles_in_db = get_titles_in_db()
+                google_sheet_list = get_googleSheet_list(google_sheet, titles_in_db)
+                ##########################
+
+                ## tried to take out the google sheet if it is already put into the django db
+                trial_year = Json_path.objects.last().trial_year
+                json_path = Json_path.objects.last().json_path
+                context = {'google_sheet_list': google_sheet_list, 'titles_in_db': titles_in_db}
+                return render(request, 'googleSheetIntoDB/data_index.html', context)
+
         else:
             return render(request,'googleSheetIntoDB/no_list_to_select.html')
     else:
@@ -359,7 +373,8 @@ def row_values_open_by_key(path_to_json, key):
         print "key is: "+ key
         raise Http404("Spreadsheet does not exist")
     else:
-        worksheet = sh.get_worksheet(4)
+        #worksheet = sh.get_worksheet(4)
+        worksheet=sh.worksheet('data_collector')
         values_list_2 = worksheet.row_values(2)
         set_title_values(values_list_2)
         values_list_3 = worksheet.row_values(3) #the contents in row number 3
@@ -447,7 +462,7 @@ def set_refresh_sheet_titles():
 
 def add_refresh_title(title):
 
-    refresh_sheet_titles.append(title)
+    refresh_sheet_titles.append(str(title))
 
 def get_refresh_sheet_titles():
     return refresh_sheet_titles
@@ -460,8 +475,8 @@ def set_import_sheet_titles():
     global import_sheet_titles
     import_sheet_titles=[]
 
-def add_import_title(sheet):
-    import_sheet_titles.append(sheet)
+def add_import_title(title):
+    import_sheet_titles.append(str(title))
 
 def get_import_sheet_titles():
     return import_sheet_titles
@@ -501,3 +516,5 @@ def import_data(request,list):
     context = { 'import_list': get_import_sheet_titles(),
                'trial_year': Json_path.objects.last().trial_year}
     return render(request, 'googleSheetIntoDB/data_in_db_success.html', context)
+
+#########################################################################################################
