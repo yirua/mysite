@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb325107-ac80-4fd0-9d8d-9ae44931a5e9" name="Default" comment="Merge remote-tracking branch 'remotes/origin/master' into mysite&#10;&#10;# Conflicts:&#10;#&#9;ReadMe.doc&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_already_exist.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_in_db_success.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/detail.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/first_choice.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/index.html&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions_installation_use.doc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Instructions_installation_use.docx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/googleSheetIntoDB/test_GoogleSheetReading.py" />
+    <list default="true" id="fb325107-ac80-4fd0-9d8d-9ae44931a5e9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/data_index.html" afterPath="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/data_index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/index.html" afterPath="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/refresh_data_in_db_success.html" afterPath="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/refresh_data_in_db_success.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/googleSheetIntoDB/views.py" afterPath="$PROJECT_DIR$/googleSheetIntoDB/views.py" />
     </list>
     <ignored path="mysite.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -474,7 +468,14 @@
       <option name="project" value="LOCAL" />
       <updated>1464904114955</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Merge remote-tracking branch 'remotes/origin/master' into mysite&#10;&#10;# Conflicts:&#10;#&#9;ReadMe.doc&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_already_exist.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_in_db_success.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/detail.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/first_choice.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/index.html&#10;">
+      <created>1466385677834</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1466385677834</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
