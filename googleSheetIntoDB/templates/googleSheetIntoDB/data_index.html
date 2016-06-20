@@ -12,6 +12,23 @@
 <link rel="stylesheet" href="build.css">
 
 <html lang="en">
+<script language="JavaScript">
+function select_all(source) {
+  select_checkboxes = document.getElementsByName('import_checks');
+  for(var i=0, n=select_checkboxes.length;i<n;i++) {
+    select_checkboxes[i].checked = source.checked;
+  }
+}
+
+function toggle(source) {
+  checkboxes = document.getElementsByName('refresh_checks');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
+
+
+</script>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,59 +53,13 @@
     {% if google_sheet_list %}
 
     <ul>
+
         <div>
-        <h3>The google sheet list that shared with your client email in download json file. </h3>
+        <h3>The google sheet list that shared with your client email in download json file for importing and refreshing. </h3>
             <table>
                     <thead>
-                    <tr><td>Sheet_title</td><td>Imported_status</td><td>Import_date</td><td>Import_data</td></tr>
-                    </thead>
-
-                    <form  action= "{% url 'googleSheetIntoDB:choose' %}" method="post">
-                                                        {% csrf_token %}
-                    {% for question in google_sheet_list %}
-                    <tr>
-                        <td><a href="/googleSheetIntoDB/detail_view/?detail_title={{ question.title }}&detail_id={{ question.id }}">{{ question.title }}</a></td>
-                        {% if question.imported_status == 'F' %}
-
-                        <td align="middle"><div class="checkbox checkbox-success"><input type="checkbox" value="{{question.id}}" disabled></div></td>
-                        {% else %}
-                        <td align="middle"><div class="checkbox checkbox-success"><input type="checkbox" checked disabled></div></td>
-                        {% endif%}
-                        <td align="middle">{{ question.imported_date }}</td>
-                        {% if question.import_data == 'F' %}
-
-                        <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" disabled></div></td>
-                        {% else %}
-                        <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" value="{{question.id}}" checked></div></td>
-                        {# {% Sheet_List.selected_import_list_append(question) %}  #}
-                        {% endif%}
-
-                       {# <td>  #}
-                       {#     <form  action= "{% url 'googleSheetIntoDB:detail_view' %}" method="get">#}
-                        {#    {% csrf_token %}#}
-                        {#        <input hidden type="" name="detail_title" value="{{ question.title }}">#}
-                        {#        <button type="submit" class="save btn btn-info" name="detail_id" value="{{ question.id }}"> View Details </button>#}
-                        {#    </form>#}
-                        {#</td>#}
-
-                    </tr>
-
-                    {% endfor%}
-                    <tr>
-                        <td></td><td></td><td></td><td>
-
-                                                        <button type="submit" class="save btn btn-info" name="sheet" value="{{ question.id }}"> Import Data </button>
-                                                        </form>
-                                                    </td>
-
-                    </tr>
-            </table>
-        </div>
-        <div>
-        <h3>The google sheet list that shared with your client email in download json file for refreshing. </h3>
-            <table>
-                    <thead>
-                    <tr><td>Sheet_title</td><td>Imported_status</td><td>Import_date</td><td>Import_data</td><td>Refresh_data</td></tr>
+                    <tr><td>Sheet_title</td><td>Imported_status</td><td>Import_date</td><td>Import_data</td><td>Refresh_data</td><td>Delete_data</td></tr>
+                    <tr><td></td><td></td><td></td><td><input type="checkbox" onclick="select_all(this)" /> Import All<br/></td><td><input type="checkbox" onClick="toggle(this)" /> Refresh All<br/></td></tr>
                     </thead>
                         <form  action= "{% url 'googleSheetIntoDB:choose_to_refresh' %}" method="post">
                             {% csrf_token %}
@@ -104,20 +75,26 @@
                             <td align="middle">{{ question.imported_date }}</td>
                             {% if question.import_data == 'F' %}
 
-                            <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" disabled></div></td>
+                            <td align="middle"><div class="checkbox checkbox-success"><input hidden name="import_checks" type="checkbox" disabled></div></td>
                             {% else %}
                             <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" value="{{question.id}}" checked></div></td>
-                            {# {% Sheet_List.selected_import_list_append(question) %}  #}
+
                             {% endif%}
 
                             {% if question.refresh_data == 'F' %}
 
-                            <td align="middle"><div class="checkbox checkbox-success"><input name="refresh_checks" type="checkbox" disabled></div></td>
+                            <td align="middle"><div class="checkbox checkbox-success"><input hidden name="refresh_checks" type="checkbox" disabled></div></td>
                             {% else %}
-                            <td align="middle"><div class="checkbox checkbox-success"><input name="refresh_checks" type="checkbox" value="{{ question.id }}" checked></div></td>
-                            {# <!-- {% Sheet_List.selected_refresh_list_append(question) %} --> #}
+                            <td align="middle"><div class="checkbox checkbox-success"><input name="refresh_checks" type="checkbox" value="{{ question.id }}" ></div></td>
+
                             {% endif%}
 
+                            {% if question.refresh_data == 'F' %}
+                            <td align="middle"><div class="checkbox checkbox-success"><input hidden name="delete_checks" type="checkbox" disabled></div></td>
+                            {% else %}
+                            <td align="middle"><div class="checkbox checkbox-success"><input name="delete_checks" type="checkbox" value="{{ question.id }}" ></div></td>
+
+                            {% endif%}
 
                         </tr>
 
@@ -126,9 +103,11 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><button type="submit" class="save btn btn-info" name="sheet" value="import_data"> Import Data </button></td>
+                                <td><button type="submit" class="save btn btn-info" name="sheet" value="import_data" onclick="return confirm('Are you sure you want to import these items?');"> Import Data </button></td>
                                 <td>
-                                   <button type="submit" class="save btn btn-info" name="sheet" value="refresh_data"> Refresh Data </button>
+                                   <button type="submit" class="save btn btn-info" name="sheet" value="refresh_data" onclick="return confirm('Are you sure you want to refresh these items?');"> Refresh Data </button>
+                                </td>
+                                <td><button type="submit" class="save btn btn-info" name="sheet" value="delete_data" onclick="return confirm('Are you sure you want to delete these items?');"> Delete Data </button>
                             </form>
                                 </td>
 
