@@ -32,7 +32,9 @@
             </tbody>
         </table>
      </div>
-
+     <div>
+         <p>{{ input_json_year }}</p>
+     </div>
      <div>
     {# <h2>path_json_db: {{ path_to_json_db }}</h2> #}
     <h3 font="Arial" STYLE="italic">Would you like to input json path and year? </h3>
@@ -44,7 +46,7 @@
             <label for="trial_year">trial_year: </label>
                             <input id="trial_year" type="text" name="trial_year" value="{{ trial_year }}">
 
-            <button type="submit" class="save btn btn-info" name="_yes"> Yes </button>
+            <button type="submit" class="save btn btn-info" name="_yes" onclick="return confirm('Are you sure you want to input these items?');"> Yes </button>
             <button type="submit" class="save btn btn-info" name="_cancel">No, thanks</button>
 
     </form>

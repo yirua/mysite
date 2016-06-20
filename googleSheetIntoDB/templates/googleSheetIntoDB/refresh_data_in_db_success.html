@@ -15,6 +15,9 @@
         {% endif %}
         {% if delete_list %}
         {% endif %}
+        {% if delete_list %}
+        <h3>Good job! You have deleted the delete_list:{{ delete_list }}, trial_year:{{ trial_year }} from database. Thank you.</h3>
+         {% endif %}
 
  <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
                         {% csrf_token %}
