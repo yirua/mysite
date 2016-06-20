@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fb325107-ac80-4fd0-9d8d-9ae44931a5e9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/data_index.html" afterPath="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/data_index.html" />
     </list>
     <ignored path="mysite.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -111,8 +110,8 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+            <state relative-caret-position="195">
+              <caret line="15" column="101" selection-start-line="15" selection-start-column="101" selection-end-line="15" selection-end-column="101" />
               <folding />
             </state>
           </provider>
@@ -475,7 +474,14 @@
       <option name="project" value="LOCAL" />
       <updated>1466385677834</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Merge remote-tracking branch 'remotes/origin/master' into mysite&#10;&#10;# Conflicts:&#10;#&#9;ReadMe.doc&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_already_exist.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_in_db_success.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/detail.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/first_choice.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/index.html&#10;">
+      <created>1466385887174</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1466385887174</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -901,8 +907,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+        <state relative-caret-position="195">
+          <caret line="15" column="101" selection-start-line="15" selection-start-column="101" selection-end-line="15" selection-end-column="101" />
           <folding />
         </state>
       </provider>
