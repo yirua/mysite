@@ -188,8 +188,8 @@ def choose_to_refresh(request):
                             # update sheet_title from data base table Metadata
                             add_import_title(Metadata.objects.last().title)
 
-                context = {'import_list': get_import_sheet_titles(),'trial_year': Json_path.objects.last().trial_year, 'org_import_list':request.POST.getlist('import_checks'),'sheet_id':sheet_id}
-                return render(request, 'googleSheetIntoDB/data_in_db_success.html', context)
+                context = {'import_list': get_import_sheet_titles(),'trial_year': Json_path.objects.last().trial_year, 'sheet_id':sheet_id}
+                return render(request, 'googleSheetIntoDB/refresh_data_in_db_success.html', context)
             elif len(import_list)==0:
                 google_sheet = list_to_choose()
                 titles_in_db = get_titles_in_db()
