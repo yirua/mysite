@@ -26,7 +26,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3870">
+            <state relative-caret-position="75">
               <caret line="278" column="57" selection-start-line="278" selection-start-column="57" selection-end-line="278" selection-end-column="57" />
               <folding>
                 <element signature="e#0#54#0" expanded="true" />
@@ -68,18 +68,18 @@
       <file leaf-file-name="refresh_data_in_db_success.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/refresh_data_in_db_success.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="107" selection-start-line="18" selection-start-column="107" selection-end-line="18" selection-end-column="107" />
+            <state relative-caret-position="390">
+              <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+            <state relative-caret-position="210">
+              <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
               <folding>
                 <element signature="n#STYLE#0;n#h3#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -100,14 +100,14 @@
       <file leaf-file-name="data_index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/data_index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1575">
+            <state relative-caret-position="637">
               <caret line="105" column="190" selection-start-line="105" selection-start-column="117" selection-end-line="105" selection-end-column="190" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -173,17 +173,17 @@
         <option value="$PROJECT_DIR$/googleSheetIntoDB/models.py" />
         <option value="$PROJECT_DIR$/googleSheetIntoDB/test_GoogleSheetReading.py" />
         <option value="$PROJECT_DIR$/mysite/settings.py" />
-        <option value="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/refresh_data_in_db_success.html" />
         <option value="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/data_index.html" />
-        <option value="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/index.html" />
         <option value="$PROJECT_DIR$/googleSheetIntoDB/views.py" />
         <option value="$PROJECT_DIR$/googleSheetIntoDB/urls.py" />
+        <option value="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/index.html" />
+        <option value="$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/refresh_data_in_db_success.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="316" />
-    <option name="y" value="192" />
+    <option name="x" value="340" />
+    <option name="y" value="377" />
     <option name="width" value="1960" />
     <option name="height" value="915" />
   </component>
@@ -481,18 +481,32 @@
       <option name="project" value="LOCAL" />
       <updated>1466385887174</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Merge remote-tracking branch 'remotes/origin/master' into mysite&#10;&#10;# Conflicts:&#10;#&#9;ReadMe.doc&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_already_exist.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_in_db_success.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/detail.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/first_choice.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/index.html&#10;">
+      <created>1466386013478</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1466386013478</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Merge remote-tracking branch 'remotes/origin/master' into mysite&#10;&#10;# Conflicts:&#10;#&#9;ReadMe.doc&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_already_exist.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/data_in_db_success.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/detail.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/first_choice.html&#10;#&#9;googleSheetIntoDB/templates/googleSheetIntoDB/index.html&#10;">
+      <created>1466535734441</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1466535734441</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="316" y="192" width="1960" height="915" extended-state="0" />
-    <editor active="false" />
+    <frame x="340" y="377" width="1960" height="915" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2132653" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2132653" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.50252527" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.49747476" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32978722" sideWeight="0.49747476" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -859,14 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/refresh_data_in_db_success.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="107" selection-start-line="18" selection-start-column="107" selection-end-line="18" selection-end-column="107" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1740">
@@ -877,9 +883,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="101" selection-start-line="15" selection-start-column="101" selection-end-line="15" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/data_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
+        <state relative-caret-position="637">
           <caret line="105" column="190" selection-start-line="105" selection-start-column="117" selection-end-line="105" selection-end-column="190" />
           <folding />
         </state>
@@ -887,7 +901,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3870">
+        <state relative-caret-position="75">
           <caret line="278" column="57" selection-start-line="278" selection-start-column="57" selection-end-line="278" selection-end-column="57" />
           <folding>
             <element signature="e#0#54#0" expanded="true" />
@@ -895,21 +909,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/index.html">
+    <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/refresh_data_in_db_success.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-          <folding>
-            <element signature="n#STYLE#0;n#h3#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="390">
+          <caret line="26" column="11" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/urls.py">
+    <entry file="file://$PROJECT_DIR$/googleSheetIntoDB/templates/googleSheetIntoDB/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" column="101" selection-start-line="15" selection-start-column="101" selection-end-line="15" selection-end-column="101" />
-          <folding />
+        <state relative-caret-position="210">
+          <caret line="14" column="65" selection-start-line="14" selection-start-column="65" selection-end-line="14" selection-end-column="65" />
+          <folding>
+            <element signature="n#STYLE#0;n#h3#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
