@@ -7,6 +7,7 @@ from django.views import generic
 from django.views.generic import TemplateView, ListView, CreateView
 from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_protect
+from django.core.exceptions import ObjectDoesNotExist
 
 import datetime
 import json
@@ -156,6 +157,7 @@ def choose_to_refresh(request):
         if 'import_data' in request.POST['sheet']:
             set_import_sheet_titles()
             set_refresh_sheet_titles()
+
             #import_data(request,request.POST.getlist('import_checks'))
             #if import_list is not empty
             if len(import_list)!=0:
@@ -213,9 +215,9 @@ def choose_to_refresh(request):
                     # create a new record object with certain parameter..
                     rows = row_values_open_by_key(Json_path.objects.last().json_path, id)
                     metadata = Metadata.objects.create_metadata(id, title, trial_year, rows)
-                    add_refresh_title(Metadata.objects.last())
+                    add_refresh_title(Metadata.objects.last().title)
 
-                context = {'refresh_list':refresh_list, 'refresh_titles':get_refresh_sheet_titles(), 'trial_year':Json_path.objects.last().trial_year}
+                context = {'refresh_list':get_refresh_sheet_titles(), 'trial_year':Json_path.objects.last().trial_year}
                 return render(request,'googleSheetIntoDB/refresh_data_in_db_success.html',context)
             else:
                 google_sheet = list_to_choose()
@@ -228,6 +230,33 @@ def choose_to_refresh(request):
                 json_path = Json_path.objects.last().json_path
                 context = {'google_sheet_list': google_sheet_list,'titles_in_db':titles_in_db}
                 return render(request, 'googleSheetIntoDB/data_index.html', context)
+        #to delete data in the django db
+        elif 'delete_data' in request.POST['sheet']:
+            #get the list from delete_checks
+            delete_list = request.POST.getlist('delete_checks')
+            set_delete_sheet_titles()
+            if delete_list:
+                for one_delete_list in delete_list:
+                    Metadata.objects.filter(sheet_id=one_delete_list).delete()
+                    add_delete_title(get_title_by_key(one_delete_list))
+                google_sheet = list_to_choose()
+                titles_in_db = get_titles_in_db()
+                google_sheet_list = get_googleSheet_list(google_sheet, titles_in_db)
+                context={'google_sheet_list': google_sheet_list,'titles_in_db':titles_in_db,'delete_list':get_delete_sheet_titles(),'trial_year':Json_path.objects.last().trial_year}
+                return render(request,'googleSheetIntoDB/refresh_data_in_db_success.html',context)
+            else:
+
+
+                google_sheet = list_to_choose()
+                titles_in_db = get_titles_in_db()
+                google_sheet_list = get_googleSheet_list(google_sheet, titles_in_db)
+                ##########################
+
+                ## tried to take out the google sheet if it is already put into the django db
+                trial_year = Json_path.objects.last().trial_year
+                json_path = Json_path.objects.last().json_path
+                context = {'google_sheet_list': google_sheet_list, 'titles_in_db': titles_in_db}
+                return render(request, 'googleSheetIntoDB/data_index.html', context)
 
         else:
             return render(request,'googleSheetIntoDB/no_list_to_select.html')
@@ -238,27 +267,41 @@ def choose_to_refresh(request):
 def choose_to_input_data(request):
     if request.GET:
         if '_cancel' in request.GET:
-            return HttpResponseRedirect('data_index.html')
+            # check if the table is empty or not
+            try:
+                query=Json_path.objects.last()
+            except ObjectDoesNotExist:
+                query =None
+
+            if query == None:
+                input_json_year='Please input Json_path and Trial_year'
+                context={'input_json_year':input_json_year}
+                return render(request,'googleSheetIntoDB/index.html',context)
+            else:
+                return HttpResponseRedirect('data_index.html')
                     # delete the row record using DELETE FROM table_name WHERE some_column=some_value;
 
         elif '_yes' in request.GET:
             trial_year = request.GET['trial_year']
             json_path = request.GET['json_path']
             # add an exception if there is also same object in the table so that it will not jump out the UNIQUE violation
-            if Json_path.objects.filter(trial_year=trial_year, json_path=json_path).exists():
-                objects = Json_path.objects.all()
-                already_there= "The json path and year are already in the table."
-                context={'json_objects':objects,'json_path_year_is_there':already_there}
-                return render(request,'googleSheetIntoDB/index.html',context)
+            if not trial_year or not json_path:
+                return HttpResponseRedirect('index.html')
             else:
-                json_file_path = Json_path.objects.create_json_path(json_path,trial_year)
-                trial_year=Json_path.objects.last().trial_year
-                json_path =Json_path.objects.last().json_path
-                # create a new record object with certain parameter..
+                if Json_path.objects.filter(trial_year=trial_year, json_path=json_path).exists():
+                    objects = Json_path.objects.all()
+                    already_there= "The json path and year are already in the table."
+                    context={'json_objects':objects,'json_path_year_is_there':already_there}
+                    return render(request,'googleSheetIntoDB/index.html',context)
+                else:
+                    json_file_path = Json_path.objects.create_json_path(json_path,trial_year)
+                    trial_year=Json_path.objects.last().trial_year
+                    json_path =Json_path.objects.last().json_path
+                    # create a new record object with certain parameter..
 
-                context = {'trial_year': trial_year, 'json_path':json_path}
+                    context = {'trial_year': trial_year, 'json_path':json_path}
 
-                return render(request,'googleSheetIntoDB/json_year_success.html', context)
+                    return render(request,'googleSheetIntoDB/json_year_success.html', context)
 
 
 
@@ -348,7 +391,8 @@ def row_values_open_by_key(path_to_json, key):
         print "key is: "+ key
         raise Http404("Spreadsheet does not exist")
     else:
-        worksheet = sh.get_worksheet(4)
+        #worksheet = sh.get_worksheet(4)
+        worksheet=sh.worksheet('data_collector')
         values_list_2 = worksheet.row_values(2)
         set_title_values(values_list_2)
         values_list_3 = worksheet.row_values(3) #the contents in row number 3
@@ -436,7 +480,7 @@ def set_refresh_sheet_titles():
 
 def add_refresh_title(title):
 
-    refresh_sheet_titles.append(title)
+    refresh_sheet_titles.append(str(title))
 
 def get_refresh_sheet_titles():
     return refresh_sheet_titles
@@ -449,14 +493,28 @@ def set_import_sheet_titles():
     global import_sheet_titles
     import_sheet_titles=[]
 
-def add_import_title(sheet):
-    import_sheet_titles.append(sheet.title)
+def add_import_title(title):
+    import_sheet_titles.append(str(title))
 
 def get_import_sheet_titles():
     return import_sheet_titles
 
 def clean_import_sheet_titles():
     import_sheet_titles.clean()
+##################################################################################
+def set_delete_sheet_titles():
+    global delete_sheet_titles
+    delete_sheet_titles=[]
+
+def add_delete_title(title):
+    delete_sheet_titles.append(str(title))
+
+def get_delete_sheet_titles():
+    return delete_sheet_titles
+
+def clean_delete_sheet_titles():
+    delete_sheet_titles.clean()
+
 ####################################################################################
 
 def import_data(request,list):
@@ -490,3 +548,5 @@ def import_data(request,list):
     context = { 'import_list': get_import_sheet_titles(),
                'trial_year': Json_path.objects.last().trial_year}
     return render(request, 'googleSheetIntoDB/data_in_db_success.html', context)
+
+#########################################################################################################

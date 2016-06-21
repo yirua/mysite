@@ -84,7 +84,26 @@ div {
                             {% endfor %}
                         </tbody>
                     </table>
+                    {% csv sheet_id  gid='830704563' as data %}
 
+                    <table class="table table-striped" id="t02" >
+                        <thead>
+                            <tr tr class="success">
+                            {% for header in data.headers %}
+                                <th>{{ header }}</th>
+                            {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in data.rows %}
+                            <tr tr class="info">
+                                {% for cell in row %}
+                                    <td>{{ cell }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 <form  action= "{% url 'googleSheetIntoDB:data_index' %}" method="GET" class="form-horizontal" role="form">
                         {% csrf_token %}
                     <div class="form-group">

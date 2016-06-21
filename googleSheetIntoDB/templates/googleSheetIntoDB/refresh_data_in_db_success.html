@@ -7,9 +7,18 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 </head>
 <body>
-        {# {% for list in refresh_list %} #}
-        <h3>Good job! You have put json_list:{{ refresh_list }} import_list: {{ import_list }} id:{{ sheet_id }} trial_year:{{ trial_year }} into database. Thank you.</h3>
-         {# {% endfor %} #}
+        {% if refresh_list %}
+        <h3>Good job! You have refreshed the refresh_list:{{ refresh_list }}, trial_year:{{ trial_year }} into database. Thank you.</h3>
+         {% endif %}
+        {% if import_list %}
+        <h3>Good job! You have imported the import_list: {{ import_list }}  trial_year:{{ trial_year }} into database. Thank you.</h3>
+        {% endif %}
+        {% if delete_list %}
+        {% endif %}
+        {% if delete_list %}
+        <h3>Good job! You have deleted the delete_list:{{ delete_list }}, trial_year:{{ trial_year }} from database. Thank you.</h3>
+         {% endif %}
+
  <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
                         {% csrf_token %}
                         <button type="submit" class="save btn btn-info">Home Page</button>
