@@ -8,14 +8,14 @@
 </head>
 <body>
 <div class="container">
-    <form  action= "{% url 'googleSheetIntoDB:data_index' %}" method="get">
+    <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
                         {% csrf_token %}
-            <label for="json_path">json_path: </label>
+            <label for="json_path">You have created the json_path: </label>
                             <input id="json_path" type="text" name="json_path" value="{{ json_path }}">
-            <label for="trial_year">trial_year: </label>
+            <label for="trial_year">You have created the trial_year: </label>
                             <input id="trial_year" type="text" name="trial_year" value="{{ trial_year }}">
 
-                        <button type="submit" class="save btn btn-info" name="_cancel">Cancel</button>
+
                         <button type="submit" class="save btn btn-info" name="_yes"> Yes </button>
     </form>
 </div>
