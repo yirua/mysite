@@ -132,22 +132,26 @@ class Json_path(models.Model):
 
 #####################################################################################
 class Agronomic_Information_Manager(models.Manager):
-    def create_agronomic_information(self,list_of_values):
-        agronomic_information=self.create(trial=list_of_values[0],recordID=list_of_values[1],application_or_treatment=list_of_values[2],product_or_nutrient_applied=list_of_values[3],date_of_application=list_of_values[4],quantity_per_acre=list_of_values[5],application_unit=list_of_values[6])
+    def create_agronomic_information(self, title,list_of_values):
+      #  agronomic_information=self.create(IDsheet=id,title=title,trial=list_of_values[0],recordID=list_of_values[1],application_or_treatment=list_of_values[2],product_or_nutrient_applied=list_of_values[3],date_of_application=list_of_values[4],quantity_per_acre=list_of_values[5],application_unit=list_of_values[6])
+
+        agronomic_information=self.create(title=title,trial=list_of_values[0],recordID=list_of_values[1],application_or_treatment=list_of_values[2],product_or_nutrient_applied=list_of_values[3],date_of_application=list_of_values[4],quantity_per_acre=list_of_values[5],application_unit=list_of_values[6])
         return agronomic_information
 
 
 
 class Agronomic_Information(models.Model):
-    trial=models.CharField(max_length=20)
-    recordID=models.IntegerField()
-    application_or_treatment=models.CharField(max_length=200)
-    product_or_nutrient_applied=models.CharField(max_length=200)
-    date_of_application=models.CharField(max_length=50)
-    quantity_per_acre = models.CharField(max_length=200)
-    application_unit = models.CharField(max_length=200)
+   # IDsheet= models.CharField(max_length=100, unique=False, default='1ZPIYJtaPNIEpT_rvvR3WfKvXYx1_p2vZtHycCPUUaJg',null=True)
+    title=models.CharField(max_length=200, default='GAH1_Agronomic_Information')
+    trial=models.CharField(max_length=20,null=True, default='GAH1')
+    recordID=models.IntegerField(null=True, default=1)
+    application_or_treatment=models.CharField(max_length=200,null=True)
+    product_or_nutrient_applied=models.CharField(max_length=200,null=True)
+    date_of_application=models.CharField(max_length=50,null=True)
+    quantity_per_acre = models.CharField(max_length=200,null=True)
+    application_unit = models.CharField(max_length=200,null=True)
     def __str__(self):
-        return self.trial
+        return self.title
     def get_recordID(self):
         return self.recordID
 
@@ -191,29 +195,7 @@ class Sheet_List(models.Model):
         del self.selected_refresh_list[:]
 
 ######################
-'''
-class Sheet_Already_In_DBManager(models.Manager):
 
-    def create_Sheet_Already_In_DB(self, pass_title):
-        sheet_already_in_db = self.create(title= pass_title)
-        # do something with the book
-
-        return sheet_already_in_db
-
-
-class Sheet_Already_In_DB(models.Model):
-    #metadata = models.ForeignKey(Metadata, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.title
-
-    objects = Sheet_Already_In_DBManager()
-
-    class Admin:
-        pass
-
-    '''
 ## using the modelForm to get field name from model
 class TitleForm(ModelForm):
     class Meta:

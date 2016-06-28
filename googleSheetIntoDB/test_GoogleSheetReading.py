@@ -1,8 +1,12 @@
+# http://tutorial.djangogirls.org/en/installation/   # reference
+# install python2.7
 ## virtualenv -p /usr/bin/python2.7 ./virtual_env/venv
 # pip install django
 # pip install gspread
 # pip install gdata   or download the package into the path Downloads/gdata/gdata-python-client-master/  sudo ./setup.py install
 # https://pythonhosted.org/gdata/installation.html
+# pip install psycopg2
+# pip install --upgrade oauth2client
 
 ################### django-sheets get the google sheet contents to show up like a table
 #### https://django-sheets.readthedocs.org/en/latest/usage.html 

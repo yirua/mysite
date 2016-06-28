@@ -7,8 +7,10 @@
     <title>Success to put data into Database</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 </head>
 <body>
+<div class="container">
         {% if refresh_list %}
         <h1>Good job! You have refreshed the refresh_list:</h1>
         <h3>{{ refresh_list }}</h3>
@@ -30,9 +32,10 @@
         <h1>from database. Thank you.</h1>
          {% endif %}
 
- <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
+    <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
                         {% csrf_token %}
                         <button type="submit" class="save btn btn-info">Home Page</button>
     </form>
+</div>
 </body>
 </html>

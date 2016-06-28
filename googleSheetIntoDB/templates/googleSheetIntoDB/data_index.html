@@ -50,6 +50,13 @@ function toggle(source) {
   </head>
   <body>
   <div class="container">
+
+      <div>
+          <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
+                        {% csrf_token %}
+                        <button type="submit" class="save btn btn-success">Home Page</button>
+            </form>
+      </div>
     {% if google_sheet_list %}
 
     <ul>
@@ -103,11 +110,11 @@ function toggle(source) {
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><button type="submit" class="save btn btn-info" name="sheet" value="import_data" onclick="return confirm('Are you sure you want to import these items?');"> Import Data </button></td>
+                                <td><button type="submit" class="save btn btn-info btn-sm" name="sheet" value="import_data" onclick="return confirm('Are you sure you want to import these items?');"> Import Data </button></td>
                                 <td>
-                                   <button type="submit" class="save btn btn-info" name="sheet" value="refresh_data" onclick="return confirm('Are you sure you want to refresh these items?');"> Refresh Data </button>
+                                   <button type="submit" class="save btn btn-info btn-sm" name="sheet" value="refresh_data" onclick="return confirm('Are you sure you want to refresh these items?');"> Refresh Data </button>
                                 </td>
-                                <td><button type="submit" class="save btn btn-info" name="sheet" value="delete_data" onclick="return confirm('Are you sure you want to delete these items?');"> Delete Data </button>
+                                <td><button type="submit" class="save btn btn-info btn-sm" name="sheet" value="delete_data" onclick="return confirm('Are you sure you want to delete these items?');"> Delete Data </button>
                             </form>
                                 </td>
 
