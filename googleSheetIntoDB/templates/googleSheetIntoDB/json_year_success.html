@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <form  action= "{% url 'googleSheetIntoDB:data_index' %}" method="get">
+    <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
                         {% csrf_token %}
             <label for="json_path">You have created the json_path: </label>
                             <input id="json_path" type="text" name="json_path" value="{{ json_path }}">
