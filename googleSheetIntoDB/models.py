@@ -4,13 +4,13 @@ from django.forms import ModelForm
 import datetime
 # Create your models here.
 # Add certain column names for the database:
-
+# As tutorial suggests, use the Manager class to create the metadata object.
 class MetadataManager(models.Manager):
 
     # use a list as parameter to create a metadata object
     def create_metadata(self, sheet_id,title, trial_year,list_of_values):
 
-        metadata = self.create(sheet_id=sheet_id,title=title,trial_year= trial_year, trial = list_of_values[0], treatment= list_of_values[1],city=list_of_values[2],farm=list_of_values[3],field=list_of_values[4],trial_ID=list_of_values[5],soil=list_of_values[6],stationID=list_of_values[7],lat=list_of_values[8],long=list_of_values[9],stn_in=list_of_values[10],stn_out=list_of_values[11],prev_crop=list_of_values[12],tillage=list_of_values[13],season_tillage=list_of_values[14],plot_len=list_of_values[15],alley_Len=list_of_values[16],row_Spacing=list_of_values[17],planter=list_of_values[18],kernels_per_Plot=list_of_values[19],grain_moisture=list_of_values[20],sample_Size=list_of_values[21],LL_lat=list_of_values[22],LL_long=list_of_values[23],LR_lat=list_of_values[24],LR_long=list_of_values[25],UR_lat=list_of_values[26],UR_long=list_of_values[27],UL_lat=list_of_values[28],UL_long=list_of_values[29],cardinal=list_of_values[30],chk1_ped=list_of_values[31],chk1_src=list_of_values[32],chk2_ped=list_of_values[33],chk2_src=list_of_values[34],chk3_ped=list_of_values[35],chk3_src=list_of_values[36],chk4_ped=list_of_values[37],chk4_src=list_of_values[38],chk5_ped=list_of_values[39],chk5_src=list_of_values[40],note1=list_of_values[41],note2=list_of_values[42],note3=list_of_values[43],note4=list_of_values[44],note5=list_of_values[45],note6=list_of_values[46],note7=list_of_values[47],note8=list_of_values[48],note9=list_of_values[49],note10=list_of_values[50],note11=list_of_values[51],note12=list_of_values[52],note13=list_of_values[53],note14=list_of_values[54],note15=list_of_values[55],note16=list_of_values[56],note17=list_of_values[57],note18=list_of_values[58],note19=list_of_values[59],note20=list_of_values[60])
+        metadata = self.create(sheet_id=sheet_id,title=title,trial_year= trial_year, trial = list_of_values[0], treatment=list_of_values[1],city=list_of_values[2],farm=list_of_values[3],field=list_of_values[4],trial_ID=list_of_values[5],soil=list_of_values[6],stationID=list_of_values[7],lat=list_of_values[8],long=list_of_values[9],stn_in=list_of_values[10],stn_out=list_of_values[11],prev_crop=list_of_values[12],tillage=list_of_values[13],season_tillage=list_of_values[14],plot_len=list_of_values[15],alley_Len=list_of_values[16],row_Spacing=list_of_values[17],planter=list_of_values[18],kernels_per_Plot=list_of_values[19],grain_moisture=list_of_values[20],sample_Size=list_of_values[21],LL_lat=list_of_values[22],LL_long=list_of_values[23],LR_lat=list_of_values[24],LR_long=list_of_values[25],UR_lat=list_of_values[26],UR_long=list_of_values[27],UL_lat=list_of_values[28],UL_long=list_of_values[29],cardinal=list_of_values[30],chk1_ped=list_of_values[31],chk1_src=list_of_values[32],chk2_ped=list_of_values[33],chk2_src=list_of_values[34],chk3_ped=list_of_values[35],chk3_src=list_of_values[36],chk4_ped=list_of_values[37],chk4_src=list_of_values[38],chk5_ped=list_of_values[39],chk5_src=list_of_values[40],note1=list_of_values[41],note2=list_of_values[42],note3=list_of_values[43],note4=list_of_values[44],note5=list_of_values[45],note6=list_of_values[46],note7=list_of_values[47],note8=list_of_values[48],note9=list_of_values[49],note10=list_of_values[50],note11=list_of_values[51],note12=list_of_values[52],note13=list_of_values[53],note14=list_of_values[54],note15=list_of_values[55],note16=list_of_values[56],note17=list_of_values[57],note18=list_of_values[58],note19=list_of_values[59],note20=list_of_values[60])
             # do something with the book
 
         return metadata
@@ -106,7 +106,7 @@ class Metadata(models.Model):
 
  # how to create an object: example
 #metadata = Metadata.objects.create_metadata("Pride and Prejudice")
-#book = Book.objects.create_book("Pride and Prejudice")
+
 
 ########### let us use a list to modify the google sheet list as backup method.
 class Json_path_Manager(models.Manager):
@@ -130,6 +130,32 @@ class Json_path(models.Model):
 
     objects = Json_path_Manager()
 
+#####################################################################################
+class Agronomic_Information_Manager(models.Manager):
+    def create_agronomic_information(self, title,list_of_values):
+      #  agronomic_information=self.create(IDsheet=id,title=title,trial=list_of_values[0],recordID=list_of_values[1],application_or_treatment=list_of_values[2],product_or_nutrient_applied=list_of_values[3],date_of_application=list_of_values[4],quantity_per_acre=list_of_values[5],application_unit=list_of_values[6])
+
+        agronomic_information=self.create(title=title,trial=list_of_values[0],recordID=list_of_values[1],application_or_treatment=list_of_values[2],product_or_nutrient_applied=list_of_values[3],date_of_application=list_of_values[4],quantity_per_acre=list_of_values[5],application_unit=list_of_values[6])
+        return agronomic_information
+
+
+
+class Agronomic_Information(models.Model):
+   # IDsheet= models.CharField(max_length=100, unique=False, default='1ZPIYJtaPNIEpT_rvvR3WfKvXYx1_p2vZtHycCPUUaJg',null=True)
+    title=models.CharField(max_length=200, default='GAH1_Agronomic_Information')
+    trial=models.CharField(max_length=20,null=True, default='GAH1')
+    recordID=models.IntegerField(null=True, default=1)
+    application_or_treatment=models.CharField(max_length=200,null=True)
+    product_or_nutrient_applied=models.CharField(max_length=200,null=True)
+    date_of_application=models.CharField(max_length=50,null=True)
+    quantity_per_acre = models.CharField(max_length=200,null=True)
+    application_unit = models.CharField(max_length=200,null=True)
+    def __str__(self):
+        return self.title
+    def get_recordID(self):
+        return self.recordID
+
+    objects=Agronomic_Information_Manager()
 
 class Sheet_List(models.Model):
 
@@ -169,29 +195,7 @@ class Sheet_List(models.Model):
         del self.selected_refresh_list[:]
 
 ######################
-'''
-class Sheet_Already_In_DBManager(models.Manager):
 
-    def create_Sheet_Already_In_DB(self, pass_title):
-        sheet_already_in_db = self.create(title= pass_title)
-        # do something with the book
-
-        return sheet_already_in_db
-
-
-class Sheet_Already_In_DB(models.Model):
-    #metadata = models.ForeignKey(Metadata, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.title
-
-    objects = Sheet_Already_In_DBManager()
-
-    class Admin:
-        pass
-
-    '''
 ## using the modelForm to get field name from model
 class TitleForm(ModelForm):
     class Meta:

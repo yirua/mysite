@@ -20,4 +20,5 @@ urlpatterns = [
 	url(r'^polls/', include('polls.urls')),
 	url(r'^googleSheetIntoDB/', include('googleSheetIntoDB.urls')),
     url(r'^admin/', admin.site.urls),
+	url(r'^', admin.site.urls),
 ]

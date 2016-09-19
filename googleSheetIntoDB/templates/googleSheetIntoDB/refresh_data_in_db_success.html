@@ -1,24 +1,41 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'googleSheetIntoDB/style.css' %}" />
 <html>
 <head>
     <title>Success to put data into Database</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
 </head>
 <body>
+<div class="container">
         {% if refresh_list %}
-        <h3>Good job! You have refreshed the refresh_list:{{ refresh_list }}, trial_year:{{ trial_year }} into database. Thank you.</h3>
+        <h1>Good job! You have refreshed the refresh_list:</h1>
+        <h3>{{ refresh_list }}</h3>
+        <h3>trial_year:{{ trial_year }}</h3>
+        <h1>into database. Thank you.</h1>
          {% endif %}
         {% if import_list %}
-        <h3>Good job! You have imported the import_list: {{ import_list }}  trial_year:{{ trial_year }} into database. Thank you.</h3>
+        <h1>Good job! You have imported the import_list: </h1>
+        <h3>{{ import_list }}  </h3>
+        <h3>trial_year:{{ trial_year }} </h3>
+        <h1>into database. Thank you.</h1>
         {% endif %}
         {% if delete_list %}
         {% endif %}
+        {% if delete_list %}
+        <h1>Good job! You have deleted the delete_list:</h1>
+        <h3>{{ delete_list }}</h3>
+        <h3>trial_year:{{ trial_year }} </h3>
+        <h1>from database. Thank you.</h1>
+         {% endif %}
 
- <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
+    <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
                         {% csrf_token %}
                         <button type="submit" class="save btn btn-info">Home Page</button>
     </form>
+</div>
 </body>
 </html>

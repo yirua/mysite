@@ -16,3 +16,6 @@ flow = OAuth2WebServerFlow(
 storage = Storage('creds.data')
 credentials = run_flow(flow, storage)
 print "access_token: %s" % credentials.access_token
+
+
+api = SpreadsheetAPI('yiweis@gmail.com', 'Sunyr1069', 'https://docs.google.com/spreadsheets/d/1ZPIYJtaPNIEpT_rvvR3WfKvXYx1_p2vZtHycCPUUaJg/edit#gid=1414159729')

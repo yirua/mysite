@@ -50,6 +50,13 @@ function toggle(source) {
   </head>
   <body>
   <div class="container">
+
+      <div>
+          <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
+                        {% csrf_token %}
+                        <button type="submit" class="save btn btn-success">Home Page</button>
+            </form>
+      </div>
     {% if google_sheet_list %}
 
     <ul>
@@ -78,7 +85,7 @@ function toggle(source) {
                             <td align="middle"><div class="checkbox checkbox-success"><input hidden name="import_checks" type="checkbox" disabled></div></td>
                             {% else %}
                             <td align="middle"><div class="checkbox checkbox-success"><input name="import_checks" type="checkbox" value="{{question.id}}" checked></div></td>
-                            {# {% Sheet_List.selected_import_list_append(question) %}  #}
+
                             {% endif%}
 
                             {% if question.refresh_data == 'F' %}
@@ -86,7 +93,7 @@ function toggle(source) {
                             <td align="middle"><div class="checkbox checkbox-success"><input hidden name="refresh_checks" type="checkbox" disabled></div></td>
                             {% else %}
                             <td align="middle"><div class="checkbox checkbox-success"><input name="refresh_checks" type="checkbox" value="{{ question.id }}" ></div></td>
-                            {# <!-- {% Sheet_List.selected_refresh_list_append(question) %} --> #}
+
                             {% endif%}
 
                             {% if question.refresh_data == 'F' %}
@@ -103,11 +110,11 @@ function toggle(source) {
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><button type="submit" class="save btn btn-info" name="sheet" value="import_data"> Import Data </button></td>
+                                <td><button type="submit" class="save btn btn-info btn-sm" name="sheet" value="import_data" onclick="return confirm('Are you sure you want to import these items?');"> Import Data </button></td>
                                 <td>
-                                   <button type="submit" class="save btn btn-info" name="sheet" value="refresh_data"> Refresh Data </button>
+                                   <button type="submit" class="save btn btn-info btn-sm" name="sheet" value="refresh_data" onclick="return confirm('Are you sure you want to refresh these items?');"> Refresh Data </button>
                                 </td>
-                                <td><button type="submit" class="save btn btn-info" name="sheet" value="delete_data"> Delete Data </button>
+                                <td><button type="submit" class="save btn btn-info btn-sm" name="sheet" value="delete_data" onclick="return confirm('Are you sure you want to delete these items?');"> Delete Data </button>
                             </form>
                                 </td>
 
