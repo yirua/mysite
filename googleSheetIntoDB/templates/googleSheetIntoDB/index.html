@@ -5,7 +5,7 @@
 <html>
 
 <head>
-    <title>Data Already Exist!</title>
+    <title>Index.html</title>
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 </head>
@@ -32,7 +32,9 @@
             </tbody>
         </table>
      </div>
-
+     <div>
+         <p>{{ input_json_year }}</p>
+     </div>
      <div>
     {# <h2>path_json_db: {{ path_to_json_db }}</h2> #}
     <h3 font="Arial" STYLE="italic">Would you like to input json path and year? </h3>
@@ -44,12 +46,14 @@
             <label for="trial_year">trial_year: </label>
                             <input id="trial_year" type="text" name="trial_year" value="{{ trial_year }}">
 
-            <button type="submit" class="save btn btn-info" name="_cancel">Cancel</button>
-            <button type="submit" class="save btn btn-info" name="_yes"> Yes </button>
+            <button type="submit" class="save btn btn-info" name="_yes" onclick="return confirm('Are you sure you want to input these items?');"> Yes </button>
+            <button type="submit" class="save btn btn-info" name="_cancel">No, thanks</button>
+
     </form>
     </div>
     <div>
         <p>{{ json_path_year_is_there }}</p>
+        <p>{{ no_json_year }}</p>
     </div>
 </div>
 </body>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'googleSheetIntoDB/style.css' %}" />
+<html>
+
+<head>
+    <title>Index.html</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <div>
+            <form  action= "{% url 'googleSheetIntoDB:index' %}" method="get">
+                        {% csrf_token %}
+                        <button type="submit" class="save btn btn-success">Home Page</button>
+            </form>
+        </div>
+        <div>
+
+        <h3 font="Arial" STYLE="italic">Please click one button </h3>
+
+        <form  action= "{% url 'googleSheetIntoDB:choose_worksheet' %}" method="get">
+                        {% csrf_token %}
+
+            <button type="submit" class="save btn btn-info btn-lg" name="_meta">Metadata_sheet </button>
+            <button type="submit" class="save btn btn-info btn-lg" name="_agro">Agronomic_sheet</button>
+
+    </form>
+    </div>
+    </div>
+</body>
+</html>
