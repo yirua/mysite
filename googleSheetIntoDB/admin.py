@@ -2,6 +2,7 @@ from django.contrib import admin
 from . import models
 from .models import Metadata
 from .models import Json_path
+from .models import Agronomic_Information
 # from .models import Sheet_List
 #from .models import Sheet_Already_In_DB
 # Register your models here.
@@ -56,6 +57,7 @@ class MultiDBTabularInline(admin.TabularInline):
 
 admin.site.register(models.Metadata)
 admin.site.register(Json_path)
+admin.site.register(Agronomic_Information)
 # admin.site.register(Sheet_List)
 # admin.site.register(Sheet_Already_In_DB)
 #admin.site.register(Metadata,MultiDBModelAdmin)
